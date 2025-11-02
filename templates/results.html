@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Search Results</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f4f8;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background-color: #0077b6;
+            color: white;
+            padding: 1em;
+            text-align: center;
+        }
+        main {
+            padding: 2em;
+        }
+        .results-box {
+            max-width: 700px;
+            margin: 0 auto;
+            background: white;
+            padding: 2em;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        #map {
+            height: 400px;
+            margin-top: 2em;
+            border-radius: 8px;
+        }
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+        li {
+            margin-bottom: 1.5em;
+            padding-bottom: 1em;
+            border-bottom: 1px solid #ddd;
+        }
+        .back-link {
+            display: block;
+            text-align: center;
+            margin-top: 2em;
+            color: #0077b6;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Search Results</h1>
+    </header>
+    <main>
+        <div class="results-box">
+            <p>Showing results for ZIP code <strong>{{ zip_code }}</strong>:</p>
+
+            <ul>
+                {% for item in results %}
+                    <li>
+                        <strong>{{ item.name }}</strong><br>
+                        {{ item.address }}<br>
+                        {{ item.phone }}<br>
+                        {% if item.email %}Email: {{ item.email }}<br>{% endif %}
+                        {% if item.hours %}Hours: {{ item.hours }}{% endif %}
+                    </li>
+                {% endfor %}
+            </ul>
+
+            <div id="map"></div>
+
+            <a href="/" class="back-link">← Back to search</a>
+        </div>
+    </main>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script>
+        const lat = {{ lat }};
+        const lon = {{ lon }};
+        const map = L.map('map').setView([lat, lon], 12);
+
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; OpenStreetMap contributors'
+        }).addTo(map);
+    </script>
+</body>
+</html>

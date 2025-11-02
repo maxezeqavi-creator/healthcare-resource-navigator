@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Healthcare Resource Navigator</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <header>
+        <h1>Healthcare Resource Navigator</h1>
+    </header>
+    <main>
+        <div class="form-box">
+            <p>Search for treatment resources by ZIP code.</p>
+            <form action="/search" method="POST">
+                <label for="zip">Enter ZIP Code:</label>
+                <input type="text" id="zip" name="zip" pattern="\d{5}" title="Enter a 5-digit ZIP code" placeholder="e.g. 42240" required>
+                <button type="submit">Search</button>
+            </form>
+        </div>
+    </main>
+</body>
+</html>
