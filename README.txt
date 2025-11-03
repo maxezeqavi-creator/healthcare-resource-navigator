@@ -11,7 +11,7 @@ A Flask-based web app that helps users find treatment resources by ZIP code and 
 
 ## Demo
 
-![screenshot](static/demo.png)  
+
 *Search results with map view*
 
 ## Setup
